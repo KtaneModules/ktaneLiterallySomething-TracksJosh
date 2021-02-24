@@ -40,7 +40,7 @@ public class literallySomethingScript : MonoBehaviour {
     private bool status;
     private bool isActive;
 
-    public double[] numb = new double[9];
+    private double[] numb = new double[9];
 
     private int serInt1;
     private int serInt2;
@@ -51,7 +51,6 @@ public class literallySomethingScript : MonoBehaviour {
     private int serInt7;
     private int serInt8;
     private int serInt9;
-    private int sumOfDigits;
 
     private int letterValues;
     private double SletterValue = 0;
@@ -73,7 +72,6 @@ public class literallySomethingScript : MonoBehaviour {
     private int letterValueI;
     private int letterValueN;
     private int letterValueG;
-    public double[] orderOfLetter = new double[9];
 
     private string serialNumber;
     private string serialLetters;
@@ -81,37 +79,18 @@ public class literallySomethingScript : MonoBehaviour {
     private static int moduleIdCounter = 1;
     private int moduleId;
     private bool _isSolved;
-    private bool itIsTime = false;
 
-    private bool ser1 = false;
-    private bool ser2 = false;
-    private bool ser3 = false;
-    private bool ser4 = false;
-    private bool ser5 = false;
-    private bool ser6 = false;
-    private bool ser7 = false;
-    private bool ser8 = false;
-    private bool ser9 = false;
+
 
 
     // Use this for initialization
     void Start () {
         moduleId = moduleIdCounter++;
         status = false;
-        ser1 = false;
-        ser2 = false;
-        ser3 = false;
-        ser4 = false;
-        ser5 = false;
-        ser6 = false;
-        ser7 = false;
-        ser8 = false;
-        ser9 = false;
         audio = GetComponent<KMAudio>();
         letterValues = 0;
         bombModule.OnActivate += Activate;
         obtainSerial();
-        sumOfDigits = Bomb.GetSerialNumberNumbers().Sum();
         ColorRender[0].material = colorful[0];
         ColorRender[1].material = colorful[0];
         ColorRender[2].material = colorful[0];
@@ -145,8 +124,10 @@ public class literallySomethingScript : MonoBehaviour {
     {
         serialNumber = Bomb.GetSerialNumber();
         serialLetters = Regex.Replace(serialNumber, @"[\d-]", string.Empty);
+        Debug.LogFormat("[Literally Something #{0}] Letters of the serial number: {1}.", moduleId, serialLetters);
         serialLetters = serialLetters + serialLetters + serialLetters + serialLetters;
         serialLetters = serialLetters.Remove(9);
+        Debug.LogFormat("[Literally Something #{0}] The Finished string of nine letters: {1}.", moduleId, serialLetters);
         serialProcess();
     }
 
@@ -168,7 +149,7 @@ public class literallySomethingScript : MonoBehaviour {
         serInt7 = st[6] - 64;
         serInt8 = st[7] - 64;
         serInt9 = st[8] - 64;
-
+        Debug.LogFormat("[Literally Something #{0}] Alphabetic Positions: S = {1}, O = {2}, M = {3}, E = {4}, T = {5}, H = {6}, I = {7}, N = {8}, G = {9}.", moduleId, serInt1, serInt2, serInt3, serInt4, serInt5, serInt6, serInt7, serInt8, serInt9);
         Adding();
     }
 
@@ -184,7 +165,6 @@ public class literallySomethingScript : MonoBehaviour {
         serInt8 = serInt8 + 14;
         serInt9 = serInt9 + 7;
 
-        
 
         Rascal();
     }
@@ -290,6 +270,8 @@ public class literallySomethingScript : MonoBehaviour {
             serInt9 = serInt9 + 1;
         }
 
+        Debug.LogFormat("[Literally Something #{0}] After Adding: S = {1}, O = {2}, M = {3}, E = {4}, T = {5}, H = {6}, I = {7}, N = {8}, G = {9}.", moduleId, serInt1, serInt2, serInt3, serInt4, serInt5, serInt6, serInt7, serInt8, serInt9);
+
         numb[0] = serInt1;
         numb[1] = serInt2;
         numb[2] = serInt3;
@@ -315,7 +297,7 @@ public class literallySomethingScript : MonoBehaviour {
             numb[i] = numb[i] - 1;
         }
 
-        Debug.LogFormat("[Literally Something #{0}] S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0], numb[1], numb[2], numb[3], numb[4], numb[5], numb[6], numb[7], numb[8]);
+        Debug.LogFormat("[Literally Something #{0}] Assigned Values: S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0], numb[1], numb[2], numb[3], numb[4], numb[5], numb[6], numb[7], numb[8]);
     }
 
     void Activate()
@@ -343,8 +325,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] S.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (SletterValue == 0)
         {
             SletterValue = 1;
@@ -358,8 +338,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] O.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (OletterValue == 0)
         {
             OletterValue = 1;
@@ -373,8 +351,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] M.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (MletterValue == 0)
         {
             MletterValue = 1;
@@ -388,8 +364,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] E.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (EletterValue == 0)
         {
             EletterValue = 1;
@@ -403,8 +377,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] T.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (TletterValue == 0)
         {
             TletterValue = 1;
@@ -418,8 +390,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] H.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (HletterValue == 0)
         {
             HletterValue = 1;
@@ -433,8 +403,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] I.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (IletterValue == 0)
         {
             IletterValue = 1;
@@ -448,8 +416,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] N.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] {1}.", moduleId, letterValues);
         if (NletterValue == 0)
         {
             NletterValue = 1;
@@ -463,8 +429,6 @@ public class literallySomethingScript : MonoBehaviour {
     {
         audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         GetComponent<KMSelectable>().AddInteractionPunch();
-        Debug.LogFormat("[Literally Something #{0}] G.", moduleId);
-        Debug.LogFormat("[Literally Something #{0}] PINGAS {1}.", moduleId, letterValues);
         if (GletterValue == 0)
         {
             GletterValue = 1;
@@ -500,7 +464,6 @@ public class literallySomethingScript : MonoBehaviour {
         else
         {
             letterValues = 0;
-            Debug.LogFormat("[Literally Something #{0}] {1}", moduleId, letterValues);
             bombModule.HandleStrike();
             StartCoroutine(AnimateStrike());
         }
