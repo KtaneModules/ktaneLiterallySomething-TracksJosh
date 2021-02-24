@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbad04880245fa48b9400be863c92b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
+  audio: {fileID: 114794877814221252}
   bombModule: {fileID: 114809043995377398}
   colorful:
   - {fileID: 2100000, guid: 418d1a09bdd1a1147b48f5f71303e0ad, type: 2}
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   - {fileID: 23991275643983772}
   - {fileID: 23595256089465864}
   - {fileID: 23717861142697286}
-  BombInfo: {fileID: 0}
+  Bomb: {fileID: 114294805413930550}
   S: {fileID: 114970613355200302}
   O: {fileID: 114446114548049262}
   M: {fileID: 114565601259630004}
