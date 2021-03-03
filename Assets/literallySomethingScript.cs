@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -120,6 +120,140 @@ public class literallySomethingScript : MonoBehaviour {
         }
         #endregion
     }
+
+    void Awake()
+    {
+        S.OnInteract += delegate { LetterS(); return false; };
+        O.OnInteract += delegate { LetterO(); return false; };
+        M.OnInteract += delegate { LetterM(); return false; };
+        E.OnInteract += delegate { LetterE(); return false; };
+        T.OnInteract += delegate { LetterT(); return false; };
+        H.OnInteract += delegate { LetterH(); return false; };
+        I.OnInteract += delegate { LetterI(); return false; };
+        N.OnInteract += delegate { LetterN(); return false; };
+        G.OnInteract += delegate { LetterG(); return false; };
+    }
+
+
+    //Letter Buttons
+
+    void LetterS()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (SletterValue == 0)
+        {
+            SletterValue = 1;
+            letterValueS = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[0].material = colorful[1];
+    }
+
+    void LetterO()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (OletterValue == 0)
+        {
+            OletterValue = 1;
+            letterValueO = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[1].material = colorful[1];
+    }
+
+    void LetterM()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (MletterValue == 0)
+        {
+            MletterValue = 1;
+            letterValueM = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[2].material = colorful[1];
+    }
+
+    void LetterE()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (EletterValue == 0)
+        {
+            EletterValue = 1;
+            letterValueE = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[3].material = colorful[1];
+    }
+
+    void LetterT()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (TletterValue == 0)
+        {
+            TletterValue = 1;
+            letterValueT = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[4].material = colorful[1];
+    }
+
+    void LetterH()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (HletterValue == 0)
+        {
+            HletterValue = 1;
+            letterValueH = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[5].material = colorful[1];
+    }
+
+    void LetterI()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (IletterValue == 0)
+        {
+            IletterValue = 1;
+            letterValueI = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[6].material = colorful[1];
+    }
+
+    void LetterN()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (NletterValue == 0)
+        {
+            NletterValue = 1;
+            letterValueN = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[7].material = colorful[1];
+    }
+
+    void LetterG()
+    {
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (GletterValue == 0)
+        {
+            GletterValue = 1;
+            letterValueG = letterValues;
+            letterValues = (letterValues + 1);
+        }
+        ColorRender[8].material = colorful[1];
+    }
+
     void obtainSerial()
     {
         serialNumber = Bomb.GetSerialNumber();
@@ -303,139 +437,6 @@ public class literallySomethingScript : MonoBehaviour {
     void Activate()
     {
         isActive = true;
-    }
-
-    void Awake()
-    {
-        S.OnInteract += delegate { LetterS(); return false; };
-        O.OnInteract += delegate { LetterO(); return false; };
-        M.OnInteract += delegate { LetterM(); return false; };
-        E.OnInteract += delegate { LetterE(); return false; };
-        T.OnInteract += delegate { LetterT(); return false; };
-        H.OnInteract += delegate { LetterH(); return false; };
-        I.OnInteract += delegate { LetterI(); return false; };
-        N.OnInteract += delegate { LetterN(); return false; };
-        G.OnInteract += delegate { LetterG(); return false; };
-    }
-
-
-    //Letter Buttons
-
-    void LetterS()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (SletterValue == 0)
-        {
-            SletterValue = 1;
-            letterValueS = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[0].material = colorful[1];
-    }
-
-    void LetterO()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (OletterValue == 0)
-        {
-            OletterValue = 1;
-            letterValueO = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[1].material = colorful[1];
-    }
-
-    void LetterM()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (MletterValue == 0)
-        {
-            MletterValue = 1;
-            letterValueM = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[2].material = colorful[1];
-    }
-
-    void LetterE()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (EletterValue == 0)
-        {
-            EletterValue = 1;
-            letterValueE = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[3].material = colorful[1];
-    }
-
-    void LetterT()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (TletterValue == 0)
-        {
-            TletterValue = 1;
-            letterValueT = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[4].material = colorful[1];
-    }
-
-    void LetterH()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (HletterValue == 0)
-        {
-            HletterValue = 1;
-            letterValueH = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[5].material = colorful[1];
-    }
-
-    void LetterI()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (IletterValue == 0)
-        {
-            IletterValue = 1;
-            letterValueI = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[6].material = colorful[1];
-    }
-
-    void LetterN()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (NletterValue == 0)
-        {
-            NletterValue = 1;
-            letterValueN = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[7].material = colorful[1];
-    }
-
-    void LetterG()
-    {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
-        if (GletterValue == 0)
-        {
-            GletterValue = 1;
-            letterValueG = letterValues;
-            letterValues = (letterValues + 1);
-        }
-        ColorRender[8].material = colorful[1];
     }
 
     void SolveOrNot()
