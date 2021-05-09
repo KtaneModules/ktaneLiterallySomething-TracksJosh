@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -431,7 +431,7 @@ public class literallySomethingScript : MonoBehaviour {
             numb[i] = numb[i] - 1;
         }
 
-        Debug.LogFormat("[Literally Something #{0}] Assigned Values: S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0], numb[1], numb[2], numb[3], numb[4], numb[5], numb[6], numb[7], numb[8]);
+        Debug.LogFormat("[Literally Something #{0}] Assigned Values: S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0] + 1, numb[1] + 1, numb[2] + 1, numb[3] + 1, numb[4] + 1, numb[5] + 1, numb[6] + 1, numb[7] + 1, numb[8] + 1);
     }
 
     void Activate()
@@ -441,8 +441,6 @@ public class literallySomethingScript : MonoBehaviour {
 
     void SolveOrNot()
     {
-
-        Debug.LogFormat("[Literally Something #{0}] S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0], numb[1], numb[2], numb[3], numb[4], numb[5], numb[6], numb[7], numb[8]);
 
         if (letterValues == 9 && letterValueS == numb[0] && letterValueO == numb[1] && letterValueM == numb[2] && letterValueE == numb[3] && letterValueT == numb[4] && letterValueH == numb[5] && letterValueI == numb[6] && letterValueN == numb[7] && letterValueG == numb[8])
         {
