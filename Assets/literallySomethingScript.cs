@@ -39,6 +39,7 @@ public class literallySomethingScript : MonoBehaviour {
 
     private bool status;
     private bool isActive;
+    private bool isStriking;
 
     private double[] numb = new double[9];
 
@@ -89,6 +90,7 @@ public class literallySomethingScript : MonoBehaviour {
         status = false;
         audio = GetComponent<KMAudio>();
         letterValues = 0;
+        Status.transform.localPosition = new Vector3(0, 0.01986f, 0);
         bombModule.OnActivate += Activate;
         obtainSerial();
         ColorRender[0].material = colorful[0];
@@ -101,6 +103,7 @@ public class literallySomethingScript : MonoBehaviour {
         ColorRender[7].material = colorful[0];
         ColorRender[8].material = colorful[0];
     }
+
     // Update is called once per frame
     void Update ()
     {
@@ -114,7 +117,7 @@ public class literallySomethingScript : MonoBehaviour {
             Status.gameObject.SetActive(false);
         }
 
-        if (letterValues == 9)
+        if (letterValues == 9 && !_isSolved)
         {
             SolveOrNot();
         }
@@ -139,8 +142,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterS()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, S.transform);
+        S.AddInteractionPunch();
         if (SletterValue == 0)
         {
             SletterValue = 1;
@@ -152,8 +157,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterO()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, O.transform);
+        O.AddInteractionPunch();
         if (OletterValue == 0)
         {
             OletterValue = 1;
@@ -165,8 +172,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterM()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, M.transform);
+        M.AddInteractionPunch();
         if (MletterValue == 0)
         {
             MletterValue = 1;
@@ -178,8 +187,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterE()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, E.transform);
+        E.AddInteractionPunch();
         if (EletterValue == 0)
         {
             EletterValue = 1;
@@ -191,8 +202,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterT()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, T.transform);
+        T.AddInteractionPunch();
         if (TletterValue == 0)
         {
             TletterValue = 1;
@@ -204,8 +217,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterH()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, H.transform);
+        H.AddInteractionPunch();
         if (HletterValue == 0)
         {
             HletterValue = 1;
@@ -217,8 +232,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterI()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, I.transform);
+        I.AddInteractionPunch();
         if (IletterValue == 0)
         {
             IletterValue = 1;
@@ -230,8 +247,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterN()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, N.transform);
+        N.AddInteractionPunch();
         if (NletterValue == 0)
         {
             NletterValue = 1;
@@ -243,8 +262,10 @@ public class literallySomethingScript : MonoBehaviour {
 
     void LetterG()
     {
-        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-        GetComponent<KMSelectable>().AddInteractionPunch();
+        if (!isActive || _isSolved || isStriking)
+            return;
+        audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, G.transform);
+        G.AddInteractionPunch();
         if (GletterValue == 0)
         {
             GletterValue = 1;
@@ -258,10 +279,13 @@ public class literallySomethingScript : MonoBehaviour {
     {
         serialNumber = Bomb.GetSerialNumber();
         serialLetters = Regex.Replace(serialNumber, @"[\d-]", string.Empty);
+        string temp = serialLetters;
         Debug.LogFormat("[Literally Something #{0}] Letters of the serial number: {1}.", moduleId, serialLetters);
-        serialLetters = serialLetters + serialLetters + serialLetters + serialLetters;
-        serialLetters = serialLetters.Remove(9);
-        Debug.LogFormat("[Literally Something #{0}] The Finished string of nine letters: {1}.", moduleId, serialLetters);
+        while (serialLetters.Length < 9)
+            serialLetters += temp;
+        if (serialLetters.Length > 9)
+            serialLetters = serialLetters.Remove(9);
+        Debug.LogFormat("[Literally Something #{0}] The finished string of nine letters: {1}.", moduleId, serialLetters);
         serialProcess();
     }
 
@@ -298,7 +322,6 @@ public class literallySomethingScript : MonoBehaviour {
         serInt7 = serInt7 + 9;
         serInt8 = serInt8 + 14;
         serInt9 = serInt9 + 7;
-
 
         Rascal();
     }
@@ -431,7 +454,7 @@ public class literallySomethingScript : MonoBehaviour {
             numb[i] = numb[i] - 1;
         }
 
-        Debug.LogFormat("[Literally Something #{0}] Assigned Values: S = {1} , O = {2} , M = {3} , E = {4} , T = {5} , H = {6} , I = {7} , N = {8} , G = {9}.", moduleId, numb[0] + 1, numb[1] + 1, numb[2] + 1, numb[3] + 1, numb[4] + 1, numb[5] + 1, numb[6] + 1, numb[7] + 1, numb[8] + 1);
+        Debug.LogFormat("[Literally Something #{0}] Assigned Values: S = {1}, O = {2}, M = {3}, E = {4}, T = {5}, H = {6}, I = {7}, N = {8}, G = {9}.", moduleId, numb[0] + 1, numb[1] + 1, numb[2] + 1, numb[3] + 1, numb[4] + 1, numb[5] + 1, numb[6] + 1, numb[7] + 1, numb[8] + 1);
     }
 
     void Activate()
@@ -441,7 +464,6 @@ public class literallySomethingScript : MonoBehaviour {
 
     void SolveOrNot()
     {
-
         if (letterValues == 9 && letterValueS == numb[0] && letterValueO == numb[1] && letterValueM == numb[2] && letterValueE == numb[3] && letterValueT == numb[4] && letterValueH == numb[5] && letterValueI == numb[6] && letterValueN == numb[7] && letterValueG == numb[8])
         {
             bombModule.HandlePass();
@@ -470,6 +492,7 @@ public class literallySomethingScript : MonoBehaviour {
 
     IEnumerator AnimateStrike()
     {
+        isStriking = true;
         SletterValue = 0;
         OletterValue = 0;
         MletterValue = 0;
@@ -548,20 +571,11 @@ public class literallySomethingScript : MonoBehaviour {
         ColorRender[7].material = colorful[0];
         ColorRender[8].material = colorful[0];
         yield return new WaitForSeconds(0.1f);
-        S.OnInteract += delegate { LetterS(); return false; };
-        O.OnInteract += delegate { LetterO(); return false; };
-        M.OnInteract += delegate { LetterM(); return false; };
-        E.OnInteract += delegate { LetterE(); return false; };
-        T.OnInteract += delegate { LetterT(); return false; };
-        H.OnInteract += delegate { LetterH(); return false; };
-        I.OnInteract += delegate { LetterI(); return false; };
-        N.OnInteract += delegate { LetterN(); return false; };
-        G.OnInteract += delegate { LetterG(); return false; };
+        isStriking = false;
     }
 
     IEnumerator SolveAnimation()
     {
-
         ColorRender[0].material = colorful[1];
         yield return new WaitForSeconds(0.1f);
         ColorRender[1].material = colorful[1];
@@ -599,5 +613,98 @@ public class literallySomethingScript : MonoBehaviour {
         ColorRender[8].material = colorful[0];
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(SolveAnimation());
+    }
+
+    //Twitch Plays
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"!{0} press <S/O/M/E/T/H/I/N/G> [Presses the specified letter] | Presses are chainable without spaces";
+    #pragma warning restore 414
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        string[] parameters = command.Split(' ');
+        if (Regex.IsMatch(parameters[0], @"^\s*press\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            if (parameters.Length > 2)
+            {
+                yield return "sendtochaterror Too many parameters!";
+            }
+            else if (parameters.Length == 2)
+            {
+                string temp = parameters[1];
+                parameters[1] = parameters[1].ToUpper();
+                char[] letters = { 'S', 'O', 'M', 'E', 'T', 'H', 'I', 'N', 'G' };
+                KMSelectable[] btns = { S, O, M, E, T, H, I, N, G };
+                double[] letVals = { SletterValue, OletterValue, MletterValue, EletterValue, TletterValue, HletterValue, IletterValue, NletterValue, GletterValue };
+                List<char> usedLetters = new List<char>();
+                for (int i = 0; i < parameters[1].Length; i++)
+                {
+                    if (!letters.Contains(parameters[1][i]))
+                    {
+                        yield return "sendtochaterror!f The specified letter '" + temp[i] + "' is invalid!";
+                        yield break;
+                    }
+                    if (letVals[Array.IndexOf(letters, parameters[1][i])] == 1)
+                    {
+                        yield return "sendtochaterror The specified letter '" + temp[i] + "' has already been pressed!";
+                        yield break;
+                    }
+                    if (usedLetters.Contains(parameters[1][i]))
+                    {
+                        yield return "sendtochaterror The specified letter '" + temp[i] + "' cannot be pressed twice!";
+                        yield break;
+                    }
+                    usedLetters.Add(parameters[1][i]);
+                }
+                for (int i = 0; i < parameters[1].Length; i++)
+                {
+                    btns[Array.IndexOf(letters, parameters[1][i])].OnInteract();
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            else if (parameters.Length == 1)
+            {
+                yield return "sendtochaterror Please specify which letter(s) you wish to press!";
+            }
+            yield break;
+        }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        while (!isActive || isStriking) yield return true;
+        List<int> pressOrder = new List<int>();
+        for (int i = 0; i < 9; i++)
+            pressOrder.Add(Array.IndexOf(numb, i));
+        int[] letVals = { letterValueS, letterValueO, letterValueM, letterValueE, letterValueT, letterValueH, letterValueI, letterValueN, letterValueG };
+        for (int i = 0; i < letterValues; i++)
+        {
+            if (letVals[pressOrder[i]] != i)
+            {
+                bombModule.HandlePass();
+                _isSolved = true;
+                status = true;
+
+                ColorRender[0].material = colorful[0];
+                ColorRender[1].material = colorful[0];
+                ColorRender[2].material = colorful[0];
+                ColorRender[3].material = colorful[0];
+                ColorRender[4].material = colorful[0];
+                ColorRender[5].material = colorful[0];
+                ColorRender[6].material = colorful[0];
+                ColorRender[7].material = colorful[0];
+                ColorRender[8].material = colorful[0];
+
+                StartCoroutine(SolveAnimation());
+                yield break;
+            }
+        }
+        KMSelectable[] btns = { S, O, M, E, T, H, I, N, G };
+        int start = letterValues;
+        for (int i = start; i < 9; i++)
+        {
+            btns[pressOrder[i]].OnInteract();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

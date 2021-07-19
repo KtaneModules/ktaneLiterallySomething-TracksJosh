@@ -626,7 +626,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520668823128968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01986, z: 0}
+  m_LocalPosition: {x: 0.075167, y: 0.01986, z: 0.076057}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4412308599772812}
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   - {fileID: 114920797326805154}
   - {fileID: 114582918581803130}
   IsPassThrough: 0
-  ChildRowLength: 1
+  ChildRowLength: 9
   Highlight: {fileID: 114922256664257228}
   SelectableColliders: []
   DefaultSelectableIndex: 0
@@ -1820,7 +1820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleType: literallySomething
   ModuleDisplayName: Literally Something
-  RequiresTimerVisibility: 1
+  RequiresTimerVisibility: 0
 --- !u!114 &114838717897629268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1868,26 +1868,6 @@ MonoBehaviour:
   NObject: {fileID: 1641172528510064}
   GObject: {fileID: 1430047910988238}
   Status: {fileID: 1520668823128968}
-  numb:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  orderOfLetter:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
 --- !u!114 &114915399668628040
 MonoBehaviour:
   m_ObjectHideFlags: 1
